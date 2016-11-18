@@ -22,7 +22,7 @@
 		$username = $_POST['user_name'];
 
 		//----------------------------------      DEBUG     ---------------------------------
-		$myfile = fopen(".warrantyCheck.debug", "a");
+		$myfile = fopen(".debug", "a");
 		
 		fwrite($myfile, date("Y-m-d H:i:s") . " | ");
 		fwrite($myfile, $username . " | ");
@@ -33,10 +33,16 @@
 		fclose($myfile);
 		//----------------------------------      DEBUG     ---------------------------------		
 
+		
+		
 		//----------------------------------  DO STUFF HERE ---------------------------------
 		// ?
 		//-----------------------------------------------------------------------------------
 
+		
+		
+		//----------------------------------  Slack Response ---------------------------------
+		
 		#Set Timestamp of Results
 		$ts = time();
 
@@ -82,10 +88,13 @@
 		$response = json_encode(array( 'response_type' => 'in_channel', 
 					       'attachments' => $attachments,
 					       'response_url' => $response_url));
+		//-----------------------------------------------------------------------------------
+		
 		
 		//Send Response to Slack
 		$curl = "curl -s -m 5 --data-urlencode 'payload=" . $response . "' '" . $response_url . "'";
 		shell_exec($curl);
+	
 	}
 	else
 	{
