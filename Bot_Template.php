@@ -47,47 +47,28 @@
 		$ts = time();
 
 		#Set Attachment
-		if ($age == 46.85)
-		{
-			$attachments = array(	[	'color' => $color,
-							'text' => $text,
-							'mrkdwn_in' => ["text"],
-							'footer' => "By Hassan A.",
-        	                        	        'ts'=> $ts
-						]);
-		}
-		else
-		{
-			$attachments = array(	[	'color' => $color,
-							'text' => $text,
-							'mrkdwn_in' => ["text"]
-						],
-						[  	'fallback' => 'Howdy from Hassan!',
-				        		'color' => '#D3D3D3',
-							'author_name' => "",
-							'thumb_url' => $image,
-						        'fields'   => array(
-							            [
-							                'title' => 'Title #1',
-							                'value' => "Test",
-							                'short' => true
-						        	    ],
-							            [
-							                'title' => 'Title #2',
-							                'value' => "Test",
-							                'short' => false
-							            ]), 
-							'footer' => $manufacturer ." API",
-	                        'footer_icon' => $footerIcon,
-        	                'ts'=> $ts
-						]);
-		}
-
+		$attachments = array(	[	'color' => $color,
+						'text' => $text,
+						'mrkdwn_in' => ["text"]
+					],
+					[  	'fallback' => 'Howdy from Hassan!',
+			        		'color' => '#D3D3D3',
+						'author_name' => "",
+						'thumb_url' => $image,
+					        'fields'   => array(
+				        		['title' => 'Title #1', 'value' => "Test", 'short' => true ],
+							['title' => 'Title #1', 'value' => "Test", 'short' => true ]),
+						'footer' => $manufacturer ." API",
+	                        		'footer_icon' => $footerIcon,
+        	                		'ts'=> $ts
+					]);
+		
 		#Set Slack Response 
 		header('Content-Type: application/json');
 		$response = json_encode(array( 'response_type' => 'in_channel', 
 					       'attachments' => $attachments,
 					       'response_url' => $response_url));
+		
 		//-----------------------------------------------------------------------------------
 		
 		
